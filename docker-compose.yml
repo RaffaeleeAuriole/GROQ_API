@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  groq-chat:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: groq-chat-app
+    ports:
+      - "8080:80"
+    environment:
+      # Imposta qui la tua API key oppure usala tramite un file .env
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    volumes:
+      # Mount in sviluppo: riflette le modifiche in tempo reale senza rebuild
+      - ./src:/var/www/html
+    restart: unless-stopped
